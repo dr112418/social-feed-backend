@@ -15,7 +15,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // 中间件
-app.use(cors());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || 'https://social-feed-frontend.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
